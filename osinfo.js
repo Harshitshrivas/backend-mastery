@@ -1,5 +1,5 @@
 
-let os = require('os');
+let os = require('os'); // Importing os module
 console.log("Operating System Info:");
 
 console.log("OS Type: " + os.type());
