@@ -1,0 +1,20 @@
+{
+  "name": "backend-mastery",
+  "version": "1.0.0",
+  "description": "Practice backend",
+  "homepage": "https://github.com/Harshitshrivas/backend-mastery#readme",
+  "bugs": {
+    "url": "https://github.com/Harshitshrivas/backend-mastery/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harshitshrivas/backend-mastery.git"
+  },
+  "license": "ISC",
+  "author": "Harshit Shrivas",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
