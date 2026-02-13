@@ -44,6 +44,21 @@ app.delete("/delete" , (req, res) =>{  // delete request is used for deleting da
     res.send("Data Deleted Successfully")
 })
 
+
+// Response Methods
+app.get("/index", (req, res) => {  // ye route index.html file ko serve karega
+    res.sendFile(__dirname + "/templates/index.html"); // __dirname se current directory ka path milta hai
+});
+
+app.get("/api", (req, res) => {  // ye route about.html file ko serve karega
+    res.json({a:1 , b:2 , c:3 , namee:["Harshit Shrivas" , " Rahool" , "Sneha" ]}  ); // json method se hum json data send kr skte hai, ye data client ko milega
+});
+
+app.use((req, res) => {
+  res.status(404).send("404 - Page not found"); // ye middleware function hai jo 404 error handle karega, jab koi route match nahi hoga to ye function call hoga    
+});
+
+
 app.listen(port , ()=>{    // jab server start ho jaye to ye message show hoga
     console.log("Server Chalaaa dhapaa");
 })
