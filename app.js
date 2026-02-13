@@ -29,6 +29,21 @@ app.get("/search" , (req, res) =>{   // query parameter ko access krne ke liye
 
 app.use(express.static('public'))  // static file serve krne ke liye, public folder ke andar jo bhi file hogi wo accessible hogi
 
+app.post("/submit", (req , res) =>{  // post request is used for submitting form data to the server
+    console.log("Form Submitted")       // post request ko handle krne ke liye, jab form submit hoga to ye message show hoga
+    res.send("Form Submitted Successfully")
+})
+
+app.put("/update" , (req, res) =>{  // put request is used for updating data on the server
+    console.log("Data Updated")       // put request ko handle krne ke liye, jab data update hoga to ye message show hoga
+    res.send("Data Updated Successfully")
+})
+
+app.delete("/delete" , (req, res) =>{  // delete request is used for deleting data from the server
+    console.log("Data Deleted")       // delete request ko handle krne ke liye, jab data delete hoga to ye message show hoga
+    res.send("Data Deleted Successfully")
+})
+
 app.listen(port , ()=>{    // jab server start ho jaye to ye message show hoga
     console.log("Server Chalaaa dhapaa");
 })
