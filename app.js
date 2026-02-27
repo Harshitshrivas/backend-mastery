@@ -74,6 +74,17 @@ app.get("/users", (req, res) => {  // ye route users.html file ko serve karega, 
 app.get( "/api/users", (req , res) => {
  return res.json(users);  // list all user 
 });
+ // dynamic route for getting user by id, jaise /api/users/1, /api/users/2, etc.
+app.get("/api/users/:id", (req, res) =>{
+    const id =  Number(req.params.id);  // dynamic route se id ko access krne ke liye
+    const user = users.find((user) => user.id === id);  // find method se user ko find krne ke liye, jo id match karega wo user return hoga
+    if(!user){
+        return res.status(404).json({error: "User not found"});
+    }
+    return res.json(user);
+})
+
+
 
 
 
