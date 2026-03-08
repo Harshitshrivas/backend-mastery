@@ -35,6 +35,33 @@ app.get("/api/users/:id", (req, res) =>{
     return res.json(user);
 })
 
+const axios = require('axios');
+
+app.get('/news',  async(req , res) => {
+     try {
+
+        const response = await axios.get("https://api.sampleapis.com/futurama/episodes");
+         res.json(response.data);
+
+     } catch (error) {
+        res.send("Error fetching API");
+     }
+});
+
+// title
+
+app.get('/title',  async(req , res) => {
+     try {
+
+        const response = await axios.get("https://api.sampleapis.com/futurama/episodes");
+        const titile = response.data.map((item) =>item.title);
+        res.json(titile);
+        // res.json(response.data);
+
+     } catch (error) {
+        res.send("Error fetching API");
+     }
+});
 
 app.listen(3000 , ()=>{
     console.log("Server is running...");
