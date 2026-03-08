@@ -58,38 +58,3 @@ const port = 3000;
 //   res.status(404).send("404 - Page not found"); // ye middleware function hai jo 404 error handle karega, jab koi route match nahi hoga to ye function call hoga    
 // });
 
-// routes for rest api (new topic)
-
-const users = require("./MOCK_DATA.json");  // json file se data import krne ke liye
-
-app.get("/users", (req, res) => {  // ye route users.html file ko serve karega, jisme users ki list show hogi
-    const html = `
-    <ul>
-     ${users.map((user) => `<li> ${user.first_name} </li>` ).join("")}
-    </ul>`;
-    res.send(html);
-});
-
-// Rest api me hum json data send krte hai, isliye hum json method ka use karenge
-app.get( "/api/users", (req , res) => {
- return res.json(users);  // list all user 
-});
- // dynamic route for getting user by id, jaise /api/users/1, /api/users/2, etc.
-app.get("/api/users/:id", (req, res) =>{
-    const id =  Number(req.params.id);  // dynamic route se id ko access krne ke liye
-    const user = users.find((user) => user.id === id);  // find method se user ko find krne ke liye, jo id match karega wo user return hoga
-    if(!user){
-        return res.status(404).json({error: "User not found"});
-    }
-    return res.json(user);
-})
-
-
-
-
-
-
-
-app.listen(port , ()=>{    // jab server start ho jaye to ye message show hoga
-    console.log("Server Chalaaa dhapaa");
-})
