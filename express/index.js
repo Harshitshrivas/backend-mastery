@@ -63,6 +63,16 @@ app.get('/title',  async(req , res) => {
      }
 });
 
+app.set('view engine' , "ejs")  // html file ko render karne k liya , chalane k liye
+
+app.get("/index" , (req, res) =>{
+       res.render("index")
+})
+
+app.get("/crypto" , (req, res) =>{
+       res.render("crypto")
+})
+
 app.listen(3000 , ()=>{
     console.log("Server is running...");
     

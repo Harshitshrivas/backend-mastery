@@ -1,0 +1,1590 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoTrade Pro - Buy & Sell Bitcoin Instantly</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Bitcoin Trading Landing Page Styles */
+
+:root {
+    --bitcoin-orange: #f7931a;
+    --bitcoin-dark: #4a4a4a;
+    --success-green: #00d4aa;
+    --danger-red: #ff4444;
+    --dark-bg: #1a1a1a;
+    --card-bg: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #6c757d;
+    --border-color: #e9ecef;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.navbar {
+    background: rgba(26, 26, 26, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--bitcoin-orange) !important;
+}
+
+/* Price Ticker */
+.price-ticker {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.ticker-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+}
+
+.ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.price-change.positive {
+    color: var(--success-green);
+}
+
+.price-change.negative {
+    color: var(--danger-red);
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23f7931a" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+    background-size: cover;
+    opacity: 0.3;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.hero-buttons {
+    margin: 2rem 0;
+}
+
+.trust-badges {
+    margin-top: 2rem;
+}
+
+/* Bitcoin Animation */
+.bitcoin-animation {
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.bitcoin-animation i {
+    font-size: 4rem;
+    color: var(--bitcoin-orange);
+    animation: float 3s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(247, 147, 26, 0.5);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Chart Container */
+.chart-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Trade Card */
+.trade-card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    margin-top: -100px;
+    position: relative;
+    z-index: 10;
+}
+
+.trade-card .card-header {
+    border: none;
+    padding: 1.5rem;
+}
+
+.trade-card .card-body {
+    padding: 2rem;
+}
+
+.nav-pills .nav-link {
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.nav-pills .nav-link.active {
+    background: var(--bitcoin-orange);
+}
+
+.quick-amounts {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.fee-info {
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.wallet-info {
+    border-radius: 10px;
+}
+
+/* Feature Cards */
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: none;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--bitcoin-orange), #ff8c00);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 10px 20px rgba(247, 147, 26, 0.3);
+}
+
+/* Pricing Cards */
+.pricing-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-card.popular {
+    border-color: var(--bitcoin-orange);
+    transform: scale(1.05);
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bitcoin-orange);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.pricing-header h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.price {
+    margin: 1.5rem 0;
+}
+
+.price .currency {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.price .amount {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--bitcoin-orange);
+}
+
+.price .period {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.pricing-features li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+.pricing-features li i {
+    margin-right: 0.75rem;
+    width: 20px;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.testimonial-stars {
+    margin-bottom: 1rem;
+    color: var(--bitcoin-orange);
+}
+
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.testimonial-author img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+/* CTA Section */
+.cta-stats h3 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.cta-stats small {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Footer */
+footer {
+    background: #000 !important;
+}
+
+footer a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--bitcoin-orange) !important;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--bitcoin-orange) !important;
+    transform: translateY(-3px);
+}
+
+/* Form Styles */
+.form-control {
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--bitcoin-orange);
+    box-shadow: 0 0 0 0.2rem rgba(247, 147, 26, 0.25);
+}
+
+.input-group-text {
+    background: var(--light-gray);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-warning {
+    background: var(--bitcoin-orange);
+}
+
+.btn-warning:hover {
+    background: #e8850f;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    .trade-card {
+        margin-top: -50px;
+        margin: 20px;
+    }
+    
+    .pricing-card.popular {
+        transform: scale(1);
+    }
+    
+    .ticker-wrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .ticker-item {
+        font-size: 0.8rem;
+    }
+    
+    .stat-box {
+        margin-bottom: 0.5rem;
+    }
+    
+    .quick-amounts {
+        justify-content: center;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Success/Error Messages */
+.alert-custom {
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+    display: none;
+}
+
+.alert-custom.success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert-custom.error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+/* Scroll Effects */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bitcoin-orange);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e8850f;
+}
+
+/* Additional utility classes */
+.text-orange {
+    color: var(--bitcoin-orange) !important;
+}
+
+.bg-orange {
+    background-color: var(--bitcoin-orange) !important;
+}
+
+.border-orange {
+    border-color: var(--bitcoin-orange) !important;
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fab fa-bitcoin text-warning me-2"></i>CryptoTrade Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-warning text-dark px-3 ms-2" href="#trade">Start Trading</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Live Price Ticker -->
+    <div class="price-ticker bg-black py-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="ticker-wrapper">
+                        <span class="ticker-item">
+                            <i class="fab fa-bitcoin text-warning"></i> BTC: $<span id="btc-price">45,234.56</span>
+                            <span class="price-change positive">+2.34%</span>
+                        </span>
+                        <span class="ticker-item">
+                            <i class="fab fa-ethereum text-primary"></i> ETH: $<span id="eth-price">2,845.12</span>
+                            <span class="price-change positive">+1.87%</span>
+                        </span>
+                        <span class="ticker-item">
+                            <i class="fas fa-coins text-warning"></i> LTC: $<span id="ltc-price">145.67</span>
+                            <span class="price-change negative">-0.45%</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <div class="badge bg-warning text-dark mb-3">
+                            <i class="fas fa-bolt me-1"></i> Limited Time: 0% Trading Fees
+                        </div>
+                        <h1 class="display-2 fw-bold text-white mb-4">
+                            Buy & Sell Bitcoin <span class="text-warning">Instantly</span>
+                        </h1>
+                        <p class="lead text-white-50 mb-4">
+                            Join 500,000+ traders using the most trusted cryptocurrency platform. 
+                            Secure, fast, and easy way to invest in Bitcoin and other digital assets.
+                        </p>
+                        <div class="hero-stats mb-4">
+                            <div class="row g-3">
+                                <div class="col-4">
+                                    <div class="stat-box">
+                                        <h3 class="text-warning">$2.5B+</h3>
+                                        <p class="small text-white-50">Trading Volume</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-box">
+                                        <h3 class="text-warning">500K+</h3>
+                                        <p class="small text-white-50">Active Users</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-box">
+                                        <h3 class="text-warning">99.9%</h3>
+                                        <p class="small text-white-50">Uptime</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-buttons">
+                            <button class="btn btn-warning btn-lg me-3" onclick="scrollToSection('trade')">
+                                <i class="fas fa-rocket me-2"></i>Start Trading Now
+                            </button>
+                            <button class="btn btn-outline-light btn-lg" onclick="scrollToSection('demo')">
+                                <i class="fas fa-play me-2"></i>Try Demo
+                            </button>
+                        </div>
+                        <div class="trust-badges mt-4">
+                            <small class="text-white-50">Trusted by:</small>
+                            <div class="d-flex gap-3 mt-2">
+                                <i class="fab fa-cc-visa text-white-50"></i>
+                                <i class="fab fa-cc-mastercard text-white-50"></i>
+                                <i class="fab fa-cc-paypal text-white-50"></i>
+                                <i class="fab fa-apple-pay text-white-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-graphic">
+                        <div class="bitcoin-animation">
+                            <i class="fab fa-bitcoin"></i>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="priceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Trade Section -->
+    <section id="trade" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="trade-card">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">
+                                <i class="fas fa-exchange-alt me-2"></i>Quick Trade
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="trade-tabs">
+                                <ul class="nav nav-pills mb-4" id="tradeTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="buy-tab" data-bs-toggle="tab" data-bs-target="#buy" type="button">
+                                            <i class="fas fa-arrow-up text-success me-1"></i> Buy Bitcoin
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="sell-tab" data-bs-toggle="tab" data-bs-target="#sell" type="button">
+                                            <i class="fas fa-arrow-down text-danger me-1"></i> Sell Bitcoin
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="tradeTabContent">
+                                    <div class="tab-pane fade show active" id="buy" role="tabpanel">
+                                        <form id="buyForm">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Amount (USD)</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="buyAmount" placeholder="100" min="10" step="10">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Bitcoin Amount</label>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" id="btcAmount" placeholder="0.002" step="0.000001" readonly>
+                                                        <span class="input-group-text">BTC</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="quick-amounts">
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setAmount(100)">$100</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setAmount(500)">$500</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setAmount(1000)">$1,000</button>
+                                                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setAmount(5000)">$5,000</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="fee-info bg-light p-3 rounded">
+                                                        <div class="d-flex justify-content-between">
+                                                            <span>Price per BTC:</span>
+                                                            <span id="pricePerBtc">$45,234.56</span>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <span>Trading Fee:</span>
+                                                            <span class="text-success">FREE</span>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between fw-bold">
+                                                            <span>Total:</span>
+                                                            <span id="totalAmount">$100.00</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-success btn-lg w-100">
+                                                        <i class="fas fa-shopping-cart me-2"></i>Buy Bitcoin Now
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="sell" role="tabpanel">
+                                        <form id="sellForm">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Bitcoin Amount</label>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" id="sellBtcAmount" placeholder="0.002" step="0.000001">
+                                                        <span class="input-group-text">BTC</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">You'll Receive (USD)</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">$</span>
+                                                        <input type="number" class="form-control" id="sellUsdAmount" placeholder="90.47" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="wallet-info bg-light p-3 rounded">
+                                                        <div class="d-flex justify-content-between">
+                                                            <span>Your BTC Balance:</span>
+                                                            <span class="text-warning">0.02345678 BTC</span>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <span>Current Value:</span>
+                                                            <span>$1,060.23</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-danger btn-lg w-100">
+                                                        <i class="fas fa-money-bill-wave me-2"></i>Sell Bitcoin Now
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Why Choose CryptoTrade Pro?</h2>
+                <p class="lead text-muted">The most advanced and user-friendly cryptocurrency trading platform</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Bank-Level Security</h4>
+                        <p>Multi-signature wallets, 2FA authentication, and cold storage keep your assets safe.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Lightning Fast</h4>
+                        <p>Execute trades in milliseconds with our high-performance trading engine.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h4>Low Fees</h4>
+                        <p>Transparent pricing with some of the lowest trading fees in the industry.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Mobile Trading</h4>
+                        <p>Trade on the go with our fully-featured mobile apps for iOS and Android.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>24/7 Support</h4>
+                        <p>Get help whenever you need it with our round-the-clock customer support.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Advanced Analytics</h4>
+                        <p>Professional trading tools and real-time market data at your fingertips.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Choose Your Plan</h2>
+                <p class="lead text-muted">Start with our free plan and upgrade as you grow</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Starter</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                                <span class="period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check text-success"></i> Up to $1,000/month trading</li>
+                            <li><i class="fas fa-check text-success"></i> Basic charting tools</li>
+                            <li><i class="fas fa-check text-success"></i> Email support</li>
+                            <li><i class="fas fa-times text-danger"></i> Advanced analytics</li>
+                            <li><i class="fas fa-times text-danger"></i> Priority support</li>
+                        </ul>
+                        <button class="btn btn-outline-primary w-100">Get Started</button>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-card popular">
+                        <div class="pricing-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3>Pro</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">29</span>
+                                <span class="period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check text-success"></i> Up to $50,000/month trading</li>
+                            <li><i class="fas fa-check text-success"></i> Advanced charting & analytics</li>
+                            <li><i class="fas fa-check text-success"></i> 24/7 chat support</li>
+                            <li><i class="fas fa-check text-success"></i> API access</li>
+                            <li><i class="fas fa-check text-success"></i> Lower trading fees</li>
+                        </ul>
+                        <button class="btn btn-warning w-100">Start Pro Trial</button>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Enterprise</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">199</span>
+                                <span class="period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check text-success"></i> Unlimited trading volume</li>
+                            <li><i class="fas fa-check text-success"></i> Professional tools suite</li>
+                            <li><i class="fas fa-check text-success"></i> Dedicated account manager</li>
+                            <li><i class="fas fa-check text-success"></i> Custom integrations</li>
+                            <li><i class="fas fa-check text-success"></i> Lowest fees guaranteed</li>
+                        </ul>
+                        <button class="btn btn-outline-primary w-100">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">What Our Traders Say</h2>
+                <p class="lead text-muted">Join thousands of satisfied customers</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="testimonial-text">"Best crypto platform I've used. Fast, secure, and the fees are unbeatable. Made my first $10K here!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/seed/user1/50/50" alt="User" class="rounded-circle">
+                            <div>
+                                <h6 class="mb-0">Sarah Johnson</h6>
+                                <small class="text-muted">Professional Trader</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="testimonial-text">"As a beginner, I found this platform incredibly easy to use. The demo account helped me learn without risk."</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/seed/user2/50/50" alt="User" class="rounded-circle">
+                            <div>
+                                <h6 class="mb-0">Mike Chen</h6>
+                                <small class="text-muted">New Investor</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="testimonial-text">"The API integration is seamless. Perfect for my trading bots. Customer support is top-notch too!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://picsum.photos/seed/user3/50/50" alt="User" class="rounded-circle">
+                            <div>
+                                <h6 class="mb-0">Alex Rodriguez</h6>
+                                <small class="text-muted">Algorithmic Trader</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold mb-4">Ready to Start Trading Bitcoin?</h2>
+            <p class="lead mb-4">Join 500,000+ traders and start your cryptocurrency journey today</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="cta-stats row g-3 mb-4">
+                        <div class="col-4">
+                            <h3 class="text-warning">$2.5B+</h3>
+                            <small>Trading Volume</small>
+                        </div>
+                        <div class="col-4">
+                            <h3 class="text-warning">500K+</h3>
+                            <small>Happy Users</small>
+                        </div>
+                        <div class="col-4">
+                            <h3 class="text-warning">150+</h3>
+                            <small>Countries</small>
+                        </div>
+                    </div>
+                    <button class="btn btn-warning btn-lg me-3" onclick="scrollToSection('trade')">
+                        <i class="fas fa-rocket me-2"></i>Start Trading Now
+                    </button>
+                    <button class="btn btn-outline-light btn-lg" onclick="scrollToSection('demo')">
+                        <i class="fas fa-play me-2"></i>Try Demo Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">
+                        <i class="fab fa-bitcoin text-warning me-2"></i>CryptoTrade Pro
+                    </h5>
+                    <p class="text-white-50">The most trusted cryptocurrency trading platform. Buy, sell, and trade Bitcoin with confidence.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 mb-4">
+                    <h6 class="mb-3">Trading</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Buy Bitcoin</a></li>
+                        <li><a href="#" class="text-white-50">Sell Bitcoin</a></li>
+                        <li><a href="#" class="text-white-50">Trade</a></li>
+                        <li><a href="#" class="text-white-50">Prices</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 mb-4">
+                    <h6 class="mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">About Us</a></li>
+                        <li><a href="#" class="text-white-50">Careers</a></li>
+                        <li><a href="#" class="text-white-50">Press</a></li>
+                        <li><a href="#" class="text-white-50">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 mb-4">
+                    <h6 class="mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Help Center</a></li>
+                        <li><a href="#" class="text-white-50">Contact Us</a></li>
+                        <li><a href="#" class="text-white-50">API Docs</a></li>
+                        <li><a href="#" class="text-white-50">Status</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 mb-4">
+                    <h6 class="mb-3">Legal</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white-50">Terms of Service</a></li>
+                        <li><a href="#" class="text-white-50">AML Policy</a></li>
+                        <li><a href="#" class="text-white-50">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-white-50">
+            <div class="text-center text-white-50">
+                <p class="mb-0">&copy; 2024 CryptoTrade Pro. All rights reserved. | Trading cryptocurrency involves risk.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all functionality
+    initPriceTicker();
+    initTradingForms();
+    initChart();
+    initAnimations();
+    initScrollEffects();
+    initCounters();
+});
+
+// Live Price Ticker
+function initPriceTicker() {
+    // Simulate live price updates
+    const prices = {
+        btc: 45234.56,
+        eth: 2845.12,
+        ltc: 145.67
+    };
+    
+    // Update prices every 3 seconds
+    setInterval(() => {
+        // Simulate price changes
+        prices.btc += (Math.random() - 0.5) * 100;
+        prices.eth += (Math.random() - 0.5) * 10;
+        prices.ltc += (Math.random() - 0.5) * 2;
+        
+        // Update DOM
+        document.getElementById('btc-price').textContent = prices.btc.toFixed(2);
+        document.getElementById('eth-price').textContent = prices.eth.toFixed(2);
+        document.getElementById('ltc-price').textContent = prices.ltc.toFixed(2);
+        
+        // Update price change indicators
+        updatePriceChanges();
+        
+        // Update trading form prices
+        updateTradingPrices(prices.btc);
+    }, 3000);
+}
+
+// Update price change indicators
+function updatePriceChanges() {
+    const changes = document.querySelectorAll('.price-change');
+    changes.forEach(change => {
+        const isPositive = Math.random() > 0.3;
+        change.className = `price-change ${isPositive ? 'positive' : 'negative'}`;
+        change.textContent = `${isPositive ? '+' : '-'}${(Math.random() * 5).toFixed(2)}%`;
+    });
+}
+
+// Update trading prices
+function updateTradingPrices(btcPrice) {
+    const pricePerBtc = document.getElementById('pricePerBtc');
+    if (pricePerBtc) {
+        pricePerBtc.textContent = `$${btcPrice.toFixed(2)}`;
+    }
+    
+    // Recalculate if user has entered amount
+    const buyAmount = document.getElementById('buyAmount');
+    if (buyAmount && buyAmount.value) {
+        calculateBtcAmount();
+    }
+}
+
+// Trading Forms
+function initTradingForms() {
+    // Buy form
+    const buyForm = document.getElementById('buyForm');
+    if (buyForm) {
+        buyForm.addEventListener('submit', handleBuySubmit);
+    }
+    
+    // Sell form
+    const sellForm = document.getElementById('sellForm');
+    if (sellForm) {
+        sellForm.addEventListener('submit', handleSellSubmit);
+    }
+    
+    // Amount input listeners
+    const buyAmount = document.getElementById('buyAmount');
+    if (buyAmount) {
+        buyAmount.addEventListener('input', calculateBtcAmount);
+    }
+    
+    const sellBtcAmount = document.getElementById('sellBtcAmount');
+    if (sellBtcAmount) {
+        sellBtcAmount.addEventListener('input', calculateUsdAmount);
+    }
+}
+
+// Calculate Bitcoin amount from USD
+function calculateBtcAmount() {
+    const usdAmount = parseFloat(document.getElementById('buyAmount').value) || 0;
+    const btcPrice = parseFloat(document.getElementById('btc-price').textContent.replace(',', ''));
+    const btcAmount = usdAmount / btcPrice;
+    
+    document.getElementById('btcAmount').value = btcAmount.toFixed(8);
+    document.getElementById('totalAmount').textContent = `$${usdAmount.toFixed(2)}`;
+}
+
+// Calculate USD amount from Bitcoin
+function calculateUsdAmount() {
+    const btcAmount = parseFloat(document.getElementById('sellBtcAmount').value) || 0;
+    const btcPrice = parseFloat(document.getElementById('btc-price').textContent.replace(',', ''));
+    const usdAmount = btcAmount * btcPrice;
+    
+    document.getElementById('sellUsdAmount').value = usdAmount.toFixed(2);
+}
+
+// Set quick amount
+function setAmount(amount) {
+    document.getElementById('buyAmount').value = amount;
+    calculateBtcAmount();
+}
+
+// Handle buy submission
+function handleBuySubmit(e) {
+    e.preventDefault();
+    
+    const buyAmount = document.getElementById('buyAmount').value;
+    const btcAmount = document.getElementById('btcAmount').value;
+    
+    // Show loading state
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="loading"></span> Processing...';
+    submitBtn.disabled = true;
+    
+    // Simulate transaction
+    setTimeout(() => {
+        showTransactionMessage('success', `Successfully purchased ${btcAmount} BTC for $${buyAmount}!`);
+        e.target.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        // Update user balance (simulation)
+        updateUserBalance(parseFloat(btcAmount));
+    }, 2000);
+}
+
+// Handle sell submission
+function handleSellSubmit(e) {
+    e.preventDefault();
+    
+    const btcAmount = document.getElementById('sellBtcAmount').value;
+    const usdAmount = document.getElementById('sellUsdAmount').value;
+    
+    // Show loading state
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="loading"></span> Processing...';
+    submitBtn.disabled = true;
+    
+    // Simulate transaction
+    setTimeout(() => {
+        showTransactionMessage('success', `Successfully sold ${btcAmount} BTC for $${usdAmount}!`);
+        e.target.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        // Update user balance (simulation)
+        updateUserBalance(-parseFloat(btcAmount));
+    }, 2000);
+}
+
+// Show transaction message
+function showTransactionMessage(type, message) {
+    // Create message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show position-fixed`;
+    messageDiv.style.cssText = 'top: 100px; right: 20px; z-index: 9999; min-width: 300px;';
+    messageDiv.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.body.appendChild(messageDiv);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        messageDiv.remove();
+    }, 5000);
+}
+
+// Update user balance (simulation)
+function updateUserBalance(change) {
+    // This would typically update from a backend
+    console.log(`Balance updated by ${change} BTC`);
+}
+
+// Initialize Chart
+function initChart() {
+    const ctx = document.getElementById('priceChart');
+    if (!ctx) return;
+    
+    // Generate sample data
+    const labels = [];
+    const data = [];
+    const currentPrice = 45234.56;
+    
+    for (let i = 30; i >= 0; i--) {
+        labels.push(`-${i}d`);
+        data.push(currentPrice + (Math.random() - 0.5) * 2000);
+    }
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Bitcoin Price (USD)',
+                data: data,
+                borderColor: '#f7931a',
+                backgroundColor: 'rgba(247, 147, 26, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0,
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#f7931a'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleColor: '#f7931a',
+                    bodyColor: '#fff',
+                    borderColor: '#f7931a',
+                    borderWidth: 1,
+                    padding: 12,
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            return `Price: $${context.parsed.y.toFixed(2)}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    display: false
+                },
+                y: {
+                    display: false
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+                axis: 'x',
+                intersect: false
+            }
+        }
+    });
+}
+
+// Animations
+function initAnimations() {
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in');
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements
+    const animateElements = document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card');
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
+
+// Scroll Effects
+function initScrollEffects() {
+    // Navbar background on scroll
+    const navbar = document.querySelector('.navbar');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(26, 26, 26, 0.98)';
+            navbar.style.backdropFilter = 'blur(15px)';
+        } else {
+            navbar.style.background = 'rgba(26, 26, 26, 0.95)';
+            navbar.style.backdropFilter = 'blur(10px)';
+        }
+    });
+    
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                const offsetTop = targetSection.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse.classList.contains('show')) {
+                    navbarCollapse.classList.remove('show');
+                }
+            }
+        });
+    });
+}
+
+// Counters Animation
+function initCounters() {
+    const counters = [
+        { id: 'trading-volume', end: 2.5, suffix: 'B+', prefix: '$' },
+        { id: 'active-users', end: 500, suffix: 'K+', prefix: '' },
+        { id: 'uptime', end: 99.9, suffix: '%', prefix: '' }
+    ];
+    
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                const counter = counters.find(c => entry.target.textContent.includes(c.suffix));
+                if (counter) {
+                    animateCounter(entry.target, counter.end, counter.suffix, counter.prefix);
+                }
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    // Observe stat elements
+    document.querySelectorAll('.stat-box h3, .cta-stats h3').forEach(el => {
+        counterObserver.observe(el);
+    });
+}
+
+// Animate counter
+function animateCounter(element, end, suffix, prefix) {
+    let current = 0;
+    const increment = end / 100;
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= end) {
+            current = end;
+            clearInterval(timer);
+        }
+        element.textContent = prefix + current.toFixed(end < 100 ? 1 : 0) + suffix;
+    }, 20);
+}
+
+// Scroll to section
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        const offsetTop = section.offsetTop - 80;
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Demo account functionality
+function initDemoAccount() {
+    const demoBtn = document.querySelector('[onclick*="demo"]');
+    if (demoBtn) {
+        demoBtn.addEventListener('click', () => {
+            showTransactionMessage('info', 'Demo account loaded with $10,000 virtual funds!');
+            
+            // Simulate demo balance
+            setTimeout(() => {
+                document.getElementById('buyAmount').value = 1000;
+                calculateBtcAmount();
+            }, 1000);
+        });
+    }
+}
+
+// Initialize demo account
+document.addEventListener('DOMContentLoaded', initDemoAccount);
+
+// Form validation
+function validateForm(form) {
+    const inputs = form.querySelectorAll('input[required]');
+    let isValid = true;
+    
+    inputs.forEach(input => {
+        if (!input.value.trim()) {
+            input.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            input.classList.remove('is-invalid');
+        }
+    });
+    
+    return isValid;
+}
+
+// Add input validation listeners
+document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input[required]');
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => {
+            if (input.value.trim()) {
+                input.classList.remove('is-invalid');
+                input.classList.add('is-valid');
+            } else {
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
+            }
+        });
+    });
+});
+
+// Mobile menu enhancements
+document.addEventListener('DOMContentLoaded', () => {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    
+    if (navbarToggler && navbarCollapse) {
+        navbarToggler.addEventListener('click', () => {
+            setTimeout(() => {
+                if (navbarCollapse.classList.contains('show')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            }, 100);
+        });
+    }
+});
+
+// Performance optimization - lazy load images
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+});
+
+// Error handling
+window.addEventListener('error', (e) => {
+    console.error('JavaScript error:', e.error);
+    // In production, you might want to send this to an error tracking service
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    // Ctrl/Cmd + K for quick trade
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        scrollToSection('trade');
+        document.getElementById('buyAmount')?.focus();
+    }
+    
+    // Escape to close modals
+    if (e.key === 'Escape') {
+        const modals = document.querySelectorAll('.modal.show');
+        modals.forEach(modal => {
+            const modalInstance = bootstrap.Modal.getInstance(modal);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+        });
+    }
+});
+
+// Export functions for global access
+window.scrollToSection = scrollToSection;
+window.setAmount = setAmount;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
