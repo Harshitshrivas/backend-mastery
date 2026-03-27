@@ -73,6 +73,10 @@ app.get("/crypto" , (req, res) =>{
        res.render("crypto")
 })
 
+// Routes Call and prcatice
+const routes = require('./router/userRoutes')
+app.use('/user' , routes)
+
 app.listen(3000 , ()=>{
     console.log("Server is running...");
     
