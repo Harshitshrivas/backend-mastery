@@ -1,10 +1,11 @@
 const express = require("express");
-
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.status(200).send("I am Harshit Shrivas Practicing Router.....");
-});
+const { usercreater , regester } = require("../controllers/userrouter");
+
+router.get("/", usercreater);
+
+router.route("/regester").get(regester);
 
 router.post("/", (req, res) => {
   res.send("Create user");
