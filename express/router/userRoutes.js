@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const {CreateUser,  usercreater , regester } = require("../controllers/userrouter");
+const {CreateUser,  usercreater , regester , userapi } = require("../controllers/userrouter");
 
 router.get("/", usercreater);
 
 router.route("/regester").get(regester);
 
 router.post("/create", CreateUser); // create user ke liye post method ka use karna hai, taki hum client se data bhej sake, aur usko create kar sake, jaise ki name, email, age, JobTitle, etc.
+
+router.get("/api" , userapi); // userapi function ko get method ke sath route me use karna hai, taki hum database me se sabhi users ko fetch kar sake, aur usko response me send kar sake
 
 router
   .route("/:idd")

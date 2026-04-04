@@ -16,6 +16,11 @@ const CreateUser = async (req, res) => {
   }
 };
 
+const userapi = async (req, res)=>{
+const allDbuser = await User.find(); // User model ke find method ka use karna hai, taki hum database me se sabhi users ko fetch kar sake, aur usko response me send kar sake
+res.json(allDbuser);
+};
+
 const usercreater = async (req, res) => {
   try {
     res.status(200).send("I am Harshit Shrivas Practicing Router.....");
@@ -28,4 +33,4 @@ const regester = (req, res) => {
   res.status(200).send("WellCome to the regestration Page Using Controlers...");
 };
 
-module.exports = { usercreater, regester , CreateUser }; // usercreater, regester, CreateUser functions ko export karna hai, taki hum usko router me use kar sake
+module.exports = { usercreater, regester , CreateUser , userapi }; // usercreater, regester, CreateUser, userapi functions ko export karna hai, taki hum usko router me use kar sake
