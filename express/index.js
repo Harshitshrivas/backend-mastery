@@ -2,6 +2,8 @@
 const expess = require('express');
 const app = expess();
 
+app.use(expess.json()); // json data ko parse karne ke liye, taki hum req.body se data access kar sake, jaise ki name, email, age, JobTitle, etc.
+
 app.get( '/', (req, res)=>{
   res.send("Hyyy expresss ! ")
 });
@@ -76,6 +78,12 @@ app.get("/crypto" , (req, res) =>{
 // Routes Call and prcatice
 const routes = require('./router/userRoutes')
 app.use('/user' , routes)
+
+// Mongodb connection
+const connectDB = require('./config/db');
+
+connectDB();
+
 
 app.listen(3000 , ()=>{
     console.log("Server is running...");
