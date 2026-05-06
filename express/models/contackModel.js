@@ -16,7 +16,7 @@ const ContactSchema = new mongoose.Schema({
         required: true,
         trim: true, // remove extra spaces
     },
-    Message: {
+    message: {
         type: String,
         required: true,
         trim: true, // remove extra spaces
