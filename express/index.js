@@ -82,6 +82,10 @@ app.use('/user' , routes)
 const contactRoutes = require('./router/contactRoutes'); // ya contactRoutes.js file se router import karna hai, taki hum usko app.use me use kar sake, jaise ki app.use('/contact', contactRoutes);
 app.use('/contact', contactRoutes); // link -> http://localhost:3000/contact/create
 
+// login and signup routes
+const authRoutes = require('./router/authRoutes'); // ya authRoutes.js file se router import karna hai, taki hum usko app.use me use kar sake, jaise ki app.use('/auth', authRoutes);
+app.use('/auth', authRoutes); // link -> http://localhost:3000/auth/signup , http://localhost:3000/auth/login
+
 // Mongodb connection
 const connectDB = require('./config/db');
 connectDB();
