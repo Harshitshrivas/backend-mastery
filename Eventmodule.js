@@ -16,8 +16,20 @@ eventEmitter.on('greeting', (name) => {
     console.log(`Hy my name is ${name}`);
 })
 
-eventEmitter.emit("greeting" , "Harshit");
+eventEmitter.on('userJoined' , (username , age) => {
+    console.log(`User ${username} has joined the chat and is ${age} years old.`);
+})
 
+eventEmitter.emit("greeting" , "Harshit");
+eventEmitter.emit("userJoined" , "Alice" , 25);
+eventEmitter.emit("userJoined" , "Alice" , 25); // bina once ka event emit karne ke dusri baar ka event emit karna bhi possible hai
+
+eventEmitter.once('onlyOnce', () => {
+    console.log("This event will be triggered only once.");
+})
+
+eventEmitter.emit("onlyOnce");
+eventEmitter.emit("onlyOnce"); // This will not trigger the event again
 
 
 
